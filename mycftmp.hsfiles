@@ -1,0 +1,238 @@
+{-# START_FILE package.yaml #-}
+version:             0.1.0.0
+author:              "{{name}}{{^name}}{{/name}}"
+github:              "{{github-username}}{{^github-username}}0xmycf{{/github-username}}/{{name}}"
+# license:             "CC-BY-NC-SA 4.0" this throws an error
+license:             "CCBYNCSA-4.0"
+#synopsis:           "Just a cool project"
+copyright:           "{{year}} {{author-name}}"
+homepage:            https://github.com/{{github-username}}{{^github-username}}0xmycf{{/github-username}}/{{name}}#readme
+
+extra-source-files:
+- README.md          
+
+# data-dir:            template
+# data-files:
+# -
+
+default-extensions:
+  - TypeOperators
+  - DerivingStrategies
+  - DeriveFunctor
+  - DeriveFoldable
+  - DeriveGeneric
+  - DeriveTraversable
+  - ExplicitNamespaces
+  - FlexibleContexts
+  - LambdaCase
+  - TupleSections
+  - BlockArguments
+  - ScopedTypeVariables
+  - MultiWayIf 
+  - EmptyDataDecls
+  - FlexibleInstances
+  - BangPatterns
+  - GADTs
+  - GeneralizedNewtypeDeriving
+  - RankNTypes
+
+description:         Please see the README on GitHub at <https://github.com/{{author-name}}/{{name}}#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- matrix
+- containers
+- parsec
+- linear
+- finitary
+- finite
+- vector
+- text
+- split
+- lens
+
+ghc-options:
+- -Wall
+
+library:
+  source-dirs: src
+  dependencies:
+  - directory
+
+executables:
+  {{name}}-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+
+    dependencies:
+    - {{name}}
+
+tests:
+  {{name}}-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - {{name}}
+    - QuickCheck
+
+benchmarks:
+  {{name}}-bench:
+    main:                Bench.hs
+    source-dirs:         bench
+    ghc-options:
+    - -O2
+    dependencies:
+    - {{name}}
+    - criterion
+
+{-# START_FILE bench/Bench.hs #-}
+import           Criterion               (bench, bgroup, nfIO)
+import qualified Criterion.Main          as CMain
+
+main :: IO ()
+main = do
+    CMain.defaultMain [
+      bgroup "Group 1" [ bench "1" $ nfIO ,    -- bench "example" $ whnf exampleBench 100000000
+                       ]
+      ]
+
+{-# START_FILE test/Spec.hs #-}
+
+main :: IO ()
+main = print "Spec..."
+
+{-# START_FILE Setup.hs #-}
+import Distribution.Simple
+main = defaultMain
+
+{-# START_FILE README.md #-}
+# {{name}}
+
+This is a project in the most fun programming language of the world!
+
+**Haskell**
+
+# License
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+
+{-# START_FILE app/Main.hs #-}
+module Main where
+
+main :: IO ()
+main = do
+  putStrLn "Hello Haskell"
+
+{-# START_FILE src/Lib.hs #-}
+module Lib where
+
+someFunc :: a -> String
+someFunc = const "Hello Haskell"
+
+{-# START_FILE LICENSE #-}
+Copyright {{author-name}}{{^author-name}}Author name here{{/author-name}} (c) {{year}}{{^year}}2022{{/year}}
+
+CC-BY-NC-SA 4.0
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+
+    * Redistributions in binary form must reproduce the above
+      copyright notice, this list of conditions and the following
+      disclaimer in the documentation and/or other materials provided
+      with the distribution.
+
+    * Neither the name of {{author-name}}{{^author-name}}Author name here{{/author-name}} nor the names of other
+      contributors may be used to endorse or promote products derived
+      from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+{-# START_FILE stack.yaml #-}
+# Some commonly used options have been documented as comments in this file.
+# For advanced use and comprehensive documentation of the format, please see:
+# https://docs.haskellstack.org/en/stable/yaml_configuration/
+
+# Resolver to choose a 'specific' stackage snapshot or a compiler version.
+# A snapshot resolver dictates the compiler version and the set of packages
+# to be used for project dependencies. For example:
+#
+# resolver: lts-3.5
+# resolver: nightly-2015-09-21
+# resolver: ghc-7.10.2
+#
+# The location of a snapshot can be provided as a file or url. Stack assumes
+# a snapshot provided as a file might change, whereas a url resource does not.
+#
+# resolver: ./custom-snapshot.yaml
+# resolver: https://example.com/snapshots/2018-01-01.yaml
+resolver: lts-18.18
+#  url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/18/18.yaml
+
+# User packages to be built.
+# Various formats can be used as shown in the example below.
+#
+# packages:
+# - some-directory
+# - https://example.com/foo/bar/baz-0.0.2.tar.gz
+#   subdirs:
+#   - auto-update
+#   - wai
+packages:
+- .
+# Dependency packages to be pulled from upstream that are not in the resolver.
+# These entries can reference officially published versions as well as
+# forks / in-progress versions pinned to a git hash. For example:
+#
+extra-deps:
+  - finitary-2.1.1.0@sha256:f0f19aace424e5fdb5543fbcfb9446e50c8cb349fe7564642c5c25dbe3418076,2743
+  - finite-1.4.1.2@sha256:9e41353b5ab053b5c937c13ec2ded6dcddb70e1f29204be4dd6bf683bb2b47c7,1931
+# - git: https://github.com/commercialhaskell/stack.git
+#   commit: e7b331f14bcffb8367cd58fbfc8b40ec7642100a
+#
+# extra-deps: []
+
+# Override default flag values for local packages and extra-deps
+# flags: {}
+
+# Extra package databases containing global packages
+# extra-package-dbs: []
+
+# Control whether we use the GHC we find on the path
+# system-ghc: true
+#
+# Require a specific version of stack, using version ranges
+# require-stack-version: -any # Default
+# require-stack-version: ">=2.7"
+#
+# Override the architecture used by stack, especially useful on Windows
+# arch: i386
+# arch: x86_64
+#
+# Extra directories used by stack for building
+# extra-include-dirs: [/path/to/dir]
+# extra-lib-dirs: [/path/to/dir]
+#
+# Allow a newer minor version of GHC than the snapshot specifies
+# compiler-check: newer-minor
