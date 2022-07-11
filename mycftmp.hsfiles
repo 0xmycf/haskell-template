@@ -1,6 +1,7 @@
 {-# START_FILE package.yaml #-}
 version:             0.1.0.0
-author:              "{{name}}{{^name}}{{/name}}"
+author:              "0xmycf"
+name:                "{{name}}{{^name}}{{/name}}"
 github:              "{{github-username}}{{^github-username}}0xmycf{{/github-username}}/{{name}}"
 # license:             "CC-BY-NC-SA 4.0" this throws an error
 license:             "CCBYNCSA-4.0"
