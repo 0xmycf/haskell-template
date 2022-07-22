@@ -1,0 +1,156 @@
+{-# START_FILE package.yaml #-}
+version:             0.1.0.0
+author:              "0xmycf"
+name:                "{{name}}{{^name}}{{/name}}"
+github:              "{{github-username}}{{^github-username}}0xmycf{{/github-username}}/{{name}}"
+# license:             "CC-BY-NC-SA 4.0" this throws an error
+license:             "CCBYNCSA-4.0"
+synopsis:            "Just a simple project"
+copyright:           "{{year}} {{author-name}}"
+homepage:            https://github.com/{{github-username}}{{^github-username}}0xmycf{{/github-username}}/{{name}}#readme
+
+extra-source-files:
+- README.md          
+
+default-extensions:
+  - TypeOperators
+  - DerivingStrategies
+  - DeriveFunctor
+  - DeriveFoldable
+  - DeriveGeneric
+  - DeriveTraversable
+  - ExplicitNamespaces
+  - FlexibleContexts
+  - LambdaCase
+  - TupleSections
+  - BlockArguments
+  - ScopedTypeVariables
+  - MultiWayIf 
+  - EmptyDataDecls
+  - FlexibleInstances
+  - BangPatterns
+  - GADTs
+  - GeneralizedNewtypeDeriving
+  - RankNTypes
+
+description:         Please see the README on GitHub at <https://github.com/{{author-name}}/{{name}}#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- matrix
+- containers
+- parsec
+- linear
+- finitary
+- finite
+- vector
+- text
+- split
+- lens
+
+ghc-options:
+- -Wall
+
+library:
+  source-dirs: src
+  dependencies:
+  - directory
+
+executables:
+  {{name}}-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+
+    dependencies:
+    - {{name}}
+
+tests:
+  {{name}}-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - {{name}}
+    - QuickCheck
+
+{-# START_FILE test/Spec.hs #-}
+
+main :: IO ()
+main = print "Spec..."
+
+{-# START_FILE Setup.hs #-}
+import Distribution.Simple
+main = defaultMain
+
+{-# START_FILE README.md #-}
+# {{name}}
+
+This is a project in the most fun programming language of the world!
+
+**Haskell**
+
+# License
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+
+{-# START_FILE app/Main.hs #-}
+module Main where
+
+main :: IO ()
+main = do
+  putStrLn "Hello Haskell"
+
+{-# START_FILE src/Lib.hs #-}
+module Lib where
+
+someFunc :: a -> String
+someFunc = const "Hello Haskell"
+
+{-# START_FILE LICENSE #-}
+Copyright {{author-name}}{{^author-name}}Author name here{{/author-name}} (c) {{year}}{{^year}}2022{{/year}}
+
+CC-BY-NC-SA 4.0
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+
+    * Redistributions in binary form must reproduce the above
+      copyright notice, this list of conditions and the following
+      disclaimer in the documentation and/or other materials provided
+      with the distribution.
+
+    * Neither the name of {{author-name}}{{^author-name}}Author name here{{/author-name}} nor the names of other
+      contributors may be used to endorse or promote products derived
+      from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+{-# START_FILE stack.yaml #-}
+packages:
+- .
+
+extra-deps:
+  - finitary-2.1.1.0@sha256:f0f19aace424e5fdb5543fbcfb9446e50c8cb349fe7564642c5c25dbe3418076,2743
+  - finite-1.4.1.2@sha256:9e41353b5ab053b5c937c13ec2ded6dcddb70e1f29204be4dd6bf683bb2b47c7,1931
+
+# extra-deps: []
