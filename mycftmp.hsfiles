@@ -36,11 +36,20 @@ default-extensions:
   - GADTs
   - GeneralizedNewtypeDeriving
   - RankNTypes
+  - RecordWildCards
+  - NamedFieldPuns
+  - OverloadedStrings
+  - EmptyDataDecls
+  - OverloadedLists
+  - TypeFamilies
+  - TemplateHaskell
 
 description:         Please see the README on GitHub at <https://github.com/{{author-name}}/{{name}}#readme>
 
 dependencies:
 - base >= 4.7 && < 5
+- mtl
+- transformers
 - matrix
 - containers
 - parsec

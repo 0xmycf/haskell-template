@@ -60,11 +60,6 @@ dependencies:
 ghc-options:
 - -Wall
 
-library:
-  source-dirs: src
-  dependencies:
-  - directory
-
 executables:
   {{name}}-exe:
     main:                Main.hs
@@ -76,23 +71,6 @@ executables:
 
     dependencies:
     - {{name}}
-
-tests:
-  {{name}}-test:
-    main:                Spec.hs
-    source-dirs:         test
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - {{name}}
-    - QuickCheck
-
-{-# START_FILE test/Spec.hs #-}
-
-main :: IO ()
-main = print "Spec..."
 
 {-# START_FILE Setup.hs #-}
 import Distribution.Simple
@@ -115,12 +93,6 @@ module Main where
 main :: IO ()
 main = do
   putStrLn "Hello Haskell"
-
-{-# START_FILE src/Lib.hs #-}
-module Lib where
-
-someFunc :: a -> String
-someFunc = const "Hello Haskell"
 
 {-# START_FILE LICENSE #-}
 Copyright {{author-name}}{{^author-name}}Author name here{{/author-name}} (c) {{year}}{{^year}}2022{{/year}}
