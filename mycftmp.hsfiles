@@ -54,12 +54,12 @@ dependencies:
 - containers
 - parsec
 - linear
-- finitary
-- finite
 - vector
 - text
 - split
 - lens
+# - finitary
+# - finite
 
 ghc-options:
 - -Wall
@@ -197,7 +197,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 # resolver: ./custom-snapshot.yaml
 # resolver: https://example.com/snapshots/2018-01-01.yaml
-resolver: lts-18.18
+resolver: lts-19.17
 #  url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/18/18.yaml
 
 # User packages to be built.
@@ -216,8 +216,8 @@ packages:
 # forks / in-progress versions pinned to a git hash. For example:
 #
 extra-deps:
-  - finitary-2.1.1.0@sha256:f0f19aace424e5fdb5543fbcfb9446e50c8cb349fe7564642c5c25dbe3418076,2743
-  - finite-1.4.1.2@sha256:9e41353b5ab053b5c937c13ec2ded6dcddb70e1f29204be4dd6bf683bb2b47c7,1931
+# - finitary-2.1.1.0@sha256:f0f19aace424e5fdb5543fbcfb9446e50c8cb349fe7564642c5c25dbe3418076,2743
+# - finite-1.4.1.2@sha256:9e41353b5ab053b5c937c13ec2ded6dcddb70e1f29204be4dd6bf683bb2b47c7,1931
 # - git: https://github.com/commercialhaskell/stack.git
 #   commit: e7b331f14bcffb8367cd58fbfc8b40ec7642100a
 #

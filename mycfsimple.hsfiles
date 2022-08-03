@@ -50,12 +50,12 @@ dependencies:
 - containers
 - parsec
 - linear
-- finitary
-- finite
 - vector
 - text
 - split
 - lens
+# - finitary
+# - finite
 
 ghc-options:
 - -Wall
@@ -155,13 +155,13 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 {-# START_FILE stack.yaml #-}
-resolver: lts-18.18
+resolver: lts-19.17
 
 packages:
 - .
 
 extra-deps:
-  - finitary-2.1.1.0@sha256:f0f19aace424e5fdb5543fbcfb9446e50c8cb349fe7564642c5c25dbe3418076,2743
-  - finite-1.4.1.2@sha256:9e41353b5ab053b5c937c13ec2ded6dcddb70e1f29204be4dd6bf683bb2b47c7,1931
+# - finitary-2.1.1.0@sha256:f0f19aace424e5fdb5543fbcfb9446e50c8cb349fe7564642c5c25dbe3418076,2743
+# - finite-1.4.1.2@sha256:9e41353b5ab053b5c937c13ec2ded6dcddb70e1f29204be4dd6bf683bb2b47c7,1931
 
 # extra-deps: []
