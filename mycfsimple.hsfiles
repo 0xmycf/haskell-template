@@ -36,9 +36,11 @@ default-extensions:
   - NamedFieldPuns
   - OverloadedStrings
   - EmptyDataDecls
-  - OverloadedLists
   - TypeFamilies
+  - DataKinds
   - TemplateHaskell
+  - TypeApplications
+  - NumericUnderscores 
 
 description:         Please see the README on GitHub at <https://github.com/{{author-name}}/{{name}}#readme>
 
@@ -54,8 +56,15 @@ dependencies:
 - text
 - split
 - lens
-# - finitary
-# - finite
+#-microlens
+- generic-lens
+#- neat-interpolation
+#- say
+#- async
+#- parallel
+#- deepseq
+#- psqueues
+#- range
 
 ghc-options:
 - -Wall
@@ -87,6 +96,7 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - {{name}}
+    - hspec
     - QuickCheck
 
 {-# START_FILE test/Spec.hs #-}
@@ -155,13 +165,8 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 {-# START_FILE stack.yaml #-}
-resolver: lts-19.17
-
+resolver: nightly-2022-11-12 # for a working hls server
 packages:
 - .
-
 extra-deps:
-# - finitary-2.1.1.0@sha256:f0f19aace424e5fdb5543fbcfb9446e50c8cb349fe7564642c5c25dbe3418076,2743
-# - finite-1.4.1.2@sha256:9e41353b5ab053b5c937c13ec2ded6dcddb70e1f29204be4dd6bf683bb2b47c7,1931
 
-# extra-deps: []
