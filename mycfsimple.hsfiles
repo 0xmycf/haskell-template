@@ -86,7 +86,7 @@ tests:
     - QuickCheck
 
 {-# START_FILE test/Spec.hs #-}
-\{-# OPTIONS_GHC -F -pgmF hspec-discover #-}
+{-# OPTIONS_GHC -F -pgmF hspec-discover #-}
 
 {-# START_FILE test/LibSpec.hs #-}
 module LibSpec (spec) where

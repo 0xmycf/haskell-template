@@ -4,7 +4,7 @@ author:              "0xmycf"
 name:                "{{name}}{{^name}}{{/name}}"
 github:              "{{github-username}}{{^github-username}}0xmycf{{/github-username}}/{{name}}"
 license:             "CC-BY-NC-SA-4.0"
-synopsis:           "Just a cool project"
+synopsis:            "Just a cool project"
 copyright:           "{{year}} {{author-name}}"
 homepage:            https://github.com/{{github-username}}{{^github-username}}0xmycf{{/github-username}}/{{name}}#readme
 
@@ -109,7 +109,7 @@ main = do
       ]
 
 {-# START_FILE test/Spec.hs #-}
-\{-# OPTIONS_GHC -F -pgmF hspec-discover #-}
+{-# OPTIONS_GHC -F -pgmF hspec-discover #-}
 
 {-# START_FILE test/LibSpec.hs #-}
 module LibSpec (spec) where
