@@ -3,8 +3,7 @@ version:             0.1.0.0
 author:              "0xmycf"
 name:                "{{name}}{{^name}}{{/name}}"
 github:              "{{github-username}}{{^github-username}}0xmycf{{/github-username}}/{{name}}"
-# license:             "CC-BY-NC-SA 4.0" this throws an error
-license:             "CCBYNCSA-4.0"
+license:             "CC-BY-NC-SA-4.0"
 synopsis:            "Just a simple project"
 copyright:           "{{year}} {{author-name}}"
 homepage:            https://github.com/{{github-username}}{{^github-username}}0xmycf{{/github-username}}/{{name}}#readme
@@ -12,59 +11,45 @@ homepage:            https://github.com/{{github-username}}{{^github-username}}0
 extra-source-files:
 - README.md
 
+language: GHC2021
 default-extensions:
-  - TypeOperators
-  - DerivingStrategies
-  - DeriveFunctor
-  - DeriveFoldable
-  - DeriveGeneric
-  - DeriveTraversable
-  - ExplicitNamespaces
-  - FlexibleContexts
-  - LambdaCase
-  - TupleSections
-  - BlockArguments
-  - ScopedTypeVariables
   - MultiWayIf
-  - EmptyDataDecls
-  - FlexibleInstances
-  - BangPatterns
-  - GADTs
-  - GeneralizedNewtypeDeriving
-  - RankNTypes
-  - RecordWildCards
-  - NamedFieldPuns
+  - BlockArguments
+  - DerivingStrategies
+  - LambdaCase
   - OverloadedStrings
-  - EmptyDataDecls
-  - TypeFamilies
+  - OverloadedLabels
+  - RecordWildCards
+  - ExplicitNamespaces
+  - GADTs
   - DataKinds
+  - TypeFamilies
+  - DeriveAnyClass
   - TemplateHaskell
-  - TypeApplications
-  - NumericUnderscores
 
-description:         Please see the README on GitHub at <https://github.com/{{author-name}}/{{name}}#readme>
+description: Please see the README on GitHub at <https://github.com/{{author-name}}/{{name}}#readme>
 
 dependencies:
 - base >= 4.7 && < 5
 - mtl
-- transformers
-- matrix
-- containers
-- parsec
-- linear
-- vector
 - text
+- transformers
+- containers
+- vector
 - split
+- filepath
+- bytestring
+# - aeson
+# - yaml
+# - parsec
+# - linear
+# - optics
 # - lens         # full blown lenses
 # - microlens    # basic stuff
 # - generic-lens # deriving Generic
 # - neat-interpolation
-# - say
 # - async
 # - parallel
-# - deepseq
-# - psqueues
-# - range
 
 ghc-options:
 - -Wall
@@ -77,10 +62,6 @@ executables:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
-
-{-# START_FILE Setup.hs #-}
-import Distribution.Simple
-main = defaultMain
 
 {-# START_FILE README.md #-}
 # {{name}}
@@ -133,7 +114,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 {-# START_FILE stack.yaml #-}
-resolver: nightly-2022-11-12 # for a working hls server
+resolver: lts-21.7
 packages:
 - .
 extra-deps:

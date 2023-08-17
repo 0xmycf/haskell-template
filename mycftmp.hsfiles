@@ -3,71 +3,55 @@ version:             0.1.0.0
 author:              "0xmycf"
 name:                "{{name}}{{^name}}{{/name}}"
 github:              "{{github-username}}{{^github-username}}0xmycf{{/github-username}}/{{name}}"
-# license:             "CC-BY-NC-SA 4.0" this throws an error
-license:             "CCBYNCSA-4.0"
-#synopsis:           "Just a cool project"
+license:             "CC-BY-NC-SA-4.0"
+synopsis:           "Just a cool project"
 copyright:           "{{year}} {{author-name}}"
 homepage:            https://github.com/{{github-username}}{{^github-username}}0xmycf{{/github-username}}/{{name}}#readme
 
 extra-source-files:
 - README.md          
 
-# data-dir:            template
-# data-files:
-# -
-
+language: GHC2021
 default-extensions:
-  - TypeOperators
-  - DerivingStrategies
-  - DeriveFunctor
-  - DeriveFoldable
-  - DeriveGeneric
-  - DeriveTraversable
-  - ExplicitNamespaces
-  - FlexibleContexts
-  - LambdaCase
-  - TupleSections
+  - MultiWayIf
   - BlockArguments
-  - ScopedTypeVariables
-  - MultiWayIf 
-  - EmptyDataDecls
-  - FlexibleInstances
-  - BangPatterns
-  - GADTs
-  - GeneralizedNewtypeDeriving
-  - RankNTypes
-  - RecordWildCards
-  - NamedFieldPuns
+  - DerivingStrategies
+  - LambdaCase
   - OverloadedStrings
-  - EmptyDataDecls
-  - TypeFamilies
+  - OverloadedLabels
+  - RecordWildCards
+  - ExplicitNamespaces
+  - GADTs
   - DataKinds
+  - TypeFamilies
+  - DeriveAnyClass
   - TemplateHaskell
-  - TypeApplications
-  - NumericUnderscores 
 
-description:         Please see the README on GitHub at <https://github.com/{{author-name}}/{{name}}#readme>
+description: Please see the README on GitHub at <https://github.com/{{author-name}}/{{name}}#readme>
 
 dependencies:
 - base >= 4.7 && < 5
 - mtl
 - transformers
-- matrix
 - containers
-- parsec
-- linear
 - vector
 - text
 - split
-- lens
-- generic-lens
-#- neat-interpolation
-#- say
-#- async
-#- parallel
-#- deepseq
-#- psqueues
-#- range
+- optics
+- async
+- parallel
+- filepath
+- bytestring
+- aeson
+- yaml
+# - parsec
+# - linear
+# - lens
+# - generic-lens
+# - neat-interpolation
+# - deepseq
+# - psqueues
+# - range
 
 ghc-options:
 - -Wall
@@ -97,8 +81,10 @@ tests:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    - -Wno-unused-imports
     dependencies:
     - {{name}}
+    - hspec
     - QuickCheck
 
 benchmarks:
@@ -123,13 +109,18 @@ main = do
       ]
 
 {-# START_FILE test/Spec.hs #-}
+\{-# OPTIONS_GHC -F -pgmF hspec-discover #-}
 
-main :: IO ()
-main = print "Spec..."
+{-# START_FILE test/LibSpec.hs #-}
+module LibSpec (spec) where
+import Test.Hspec
+import Lib (someFunc)
 
-{-# START_FILE Setup.hs #-}
-import Distribution.Simple
-main = defaultMain
+spec :: Spec
+spec = 
+  describe "Default Spec" $ do
+    it "testing ouput of someFunc" $ do
+        someFunc () `shouldBe` "Hello Haskell"
 
 {-# START_FILE README.md #-}
 # {{name}}
@@ -188,7 +179,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 {-# START_FILE stack.yaml #-}
-resolver: nightly-2022-11-12 # for a working hls server
+resolver: lts-21.7
 packages:
 - .
 extra-deps:
